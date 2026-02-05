@@ -3,16 +3,16 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Pressable 
 import { Modal, TouchableWithoutFeedback } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
-import RegisterScreen from './RegisterScreen';
-import OnlineRegisterScreen from './OnlineRegisterScreen';
-import RevisitReminderScreen from './RevisitReminderScreen';
-import EmergencyCallScreen from './EmergencyCallScreen';
-import AppointmentReminderScreen from './AppointmentReminderScreen';
-import MedicationReminderScreen from './MedicationReminderScreen';
-import MRNavigationScreen from './MRNavigationScreen';
-import HealthEducationScreen from './HealthEducationScreen';
-import ChatScreen from './ChatScreen';
-import GameScreen from './GameScreen';
+import RegisterScreen from './.expo/src/screen/RegisterScreen';
+import OnlineRegisterScreen from './.expo/src/screen/OnlineRegisterScreen';
+import RevisitReminderScreen from './.expo/src/screen/RevisitReminderScreen';
+import EmergencyCallScreen from './.expo/src/screen/EmergencyCallScreen';
+import AppointmentReminderScreen from './.expo/src/screen/AppointmentReminderScreen';
+import MedicationReminderScreen from './.expo/src/screen/MedicationReminderScreen';
+import MRNavigationScreen from './.expo/src/screen/MRNavigationScreen';
+import HealthEducationScreen from './.expo/src/screen/HealthEducationScreen';
+import ChatScreen from './.expo/src/screen/ChatScreen';
+import GameScreen from './.expo/src/screen/GameScreen';
 
 
 export default function App() {
