@@ -65,7 +65,7 @@ export default function RegisterScreen({ goHome }) {
       {step === 1 && (
         <>
           <View style={styles.inputGroup}>
-            <Image source={require('./assets/icon.png')} style={styles.icon} />
+            <Image source={require('../assets/icon.png')} style={styles.icon} />
             <TextInput
               style={styles.input}
               placeholder="健保卡號"
@@ -76,7 +76,7 @@ export default function RegisterScreen({ goHome }) {
             />
           </View>
           <View style={styles.inputGroup}>
-            <Image source={require('./assets/icon.png')} style={styles.icon} />
+            <Image source={require('../assets/icon.png')} style={styles.icon} />
             <TextInput
               style={styles.input}
               placeholder="姓名"
@@ -125,7 +125,7 @@ export default function RegisterScreen({ goHome }) {
       {step === 3 && (
         <>
           <View style={styles.inputGroup}>
-            <Image source={require('./assets/icon.png')} style={styles.icon} />
+            <Image source={require('../assets/icon.png')} style={styles.icon} />
             <TextInput
               style={styles.input}
               placeholder="家屬姓名"
@@ -135,8 +135,8 @@ export default function RegisterScreen({ goHome }) {
             />
           </View>
           <View style={styles.inputGroup}>
-            <Image source={require('./assets/icon.png')} style={styles.icon} />
-            <TextInput
+            <Image source={require('../assets/icon.png')} style={styles.icon} />
+            <TextInpu
               style={styles.input}
               placeholder="電話號碼"
               placeholderTextColor="#fff"

@@ -3,16 +3,16 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Pressable 
 import { Modal, TouchableWithoutFeedback } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
-import RegisterScreen from './github/src/RegisterScreen';
-import OnlineRegisterScreen from './github/src/OnlineRegisterScreen';
-import RevisitReminderScreen from './github/src/RevisitReminderScreen';
-import EmergencyCallScreen from './github/src/EmergencyCallScreen';
-import AppointmentReminderScreen from './github/src/AppointmentReminderScreen';
-import MedicationReminderScreen from './github/src/MedicationReminderScreen';
-import MRNavigationScreen from './github/src/MRNavigationScreen';
-import HealthEducationScreen from './github/src/HealthEducationScreen';
-import ChatScreen from './github/src/ChatScreen';
-import GameScreen from './github/src/GameScreen';
+import RegisterScreen from './src/screen/RegisterScreen';
+import OnlineRegisterScreen from './src/screen/OnlineRegisterScreen';
+import RevisitReminderScreen from './src/screen/RevisitReminderScreen';
+import EmergencyCallScreen from './src/screen/EmergencyCallScreen';
+import AppointmentReminderScreen from './src/screen/AppointmentReminderScreen';
+import MedicationReminderScreen from './src/screen/MedicationReminderScreen';
+import MRNavigationScreen from './src/screen/MRNavigationScreen';
+import HealthEducationScreen from './src/screen/HealthEducationScreen';
+import ChatScreen from './src/screen/ChatScreen';
+import GameScreen from './src/screen/GameScreen';
 
 
 export default function App() {
@@ -42,7 +42,7 @@ export default function App() {
         </View>
         {/* 中間 icon */}
         <View style={styles.welcomeIconWrap}>
-          <Image source={require('./assets/center-icon.png')} style={styles.welcomeCenterIcon} />
+          <Image source={require('./src/assets/center-icon.png')} style={styles.welcomeCenterIcon} />
         </View>
         {/* 按鈕區塊 */}
         <View style={styles.welcomeBtnGroup}>
@@ -131,7 +131,7 @@ export default function App() {
         <View style={styles.fixedHeader}>
           <View style={styles.headerLeft}>
             <View style={styles.logoCircle}>
-              <Image source={require('./assets/center-icon.png')} style={{ width: 32, height: 32 }} />
+              <Image source={require('./src/assets/center-icon.png')} style={{ width: 32, height: 32 }} />
             </View>
             <Text style={styles.headerTitle}>護你同在</Text>
           </View>
