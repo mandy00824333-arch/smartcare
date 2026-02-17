@@ -13,6 +13,7 @@ import MRNavigationScreen from './src/screen/MRNavigationScreen';
 import HealthEducationScreen from './src/screen/HealthEducationScreen';
 import ChatScreen from './src/screen/ChatScreen';
 import GameScreen from './src/screen/GameScreen';
+import WelcomeCard from './src/components/WelcomeCard';
 
 
 export default function App() {
@@ -69,6 +70,8 @@ export default function App() {
     content = (
       <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1, paddingTop: 20 }}>
         <View style={styles.root}>
+          {/* 歡迎卡片 */}
+          <WelcomeCard name="使用者" />
           <Text style={[styles.sectionTitle, { marginTop: 0 }]}>所有服務</Text>
           <View style={[styles.grid, styles.scrollArea]}>
             {services.map((item, idx) => (

@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 export default function HealthEducationScreen({ goHome }) {
   const categories = [
-    '全部', '營養飲食', '運動健身', '心理健康', '慢性病', '預防保健', '急救知識'
+    '全部', '營養飲食', '運動健身', '心理健康', '慢性病', '預防保健', '急救知識', '服藥禁忌'
   ];
   const [selectedCategory, setSelectedCategory] = useState('全部');
   const [search, setSearch] = useState('');

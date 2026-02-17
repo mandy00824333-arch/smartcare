@@ -18,6 +18,9 @@ export default function GameScreen({ goHome }) {
           <Text style={styles.subtitleText}>寓教於樂學健康</Text>
         </View>
       </View>
+      <View style={styles.titleTextBox}>
+          <Text style={styles.titleText}>數獨遊戲</Text>
+      </View>
       <TouchableOpacity style={styles.backBtn} onPress={goHome}>
         <Text style={styles.backBtnText}>返回主畫面</Text>
       </TouchableOpacity>

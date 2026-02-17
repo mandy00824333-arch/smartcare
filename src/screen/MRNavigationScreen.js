@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
+import { ScrollView, View, Text, Image, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function MRNavigationScreen({ goHome }) {
@@ -17,6 +17,19 @@ export default function MRNavigationScreen({ goHome }) {
           <Text style={styles.subtitleText}>混合實境引導您到正確的診間</Text>
         </View>
       </View>
+        <View style={styles.headerLeft}>
+          <Image source={require('../assets/mr-navigation.jpg')} style={{ width: 460, height: 580 }} />
+        </View>
+
+      <ButtonBar>
+        <TouchableOpacity style={styles.backBtn}>
+          <Text style={styles.backBtnText}>上一步</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.nextBtn}>
+          <Text style={styles.nextBtnText}>下一步</Text>
+        </TouchableOpacity>
+      </ButtonBar>
+
       <TouchableOpacity style={styles.backBtn} onPress={goHome}>
         <Text style={styles.backBtnText}>返回主畫面</Text>
       </TouchableOpacity>
@@ -69,7 +82,14 @@ const sideMenuStyles = {
 };
 
 Object.assign(styles, sideMenuStyles);
+
+  // ButtonBar 元件
+  function ButtonBar({ children }) {
+    return <View style={styles.buttonBar}>{children}</View>;
+  }
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -113,13 +133,19 @@ const styles = StyleSheet.create({
     color: '#666',
     letterSpacing: 1,
   },
+  buttonBar: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginVertical: 16,
+    gap: 16,
+  },
   backBtn: {
     backgroundColor: '#8bbec7',
     borderRadius: 20,
-    paddingVertical: 16,
-    paddingHorizontal: 48,
+    paddingVertical: 14,
+    paddingHorizontal: 32,
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 8,
   },
   backBtnText: {
     color: '#fff',
@@ -127,5 +153,23 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     letterSpacing: 2,
   },
+  nextBtn: {
+    backgroundColor: '#b16ee9',
+    borderRadius: 20,
+    paddingVertical: 14,
+    paddingHorizontal: 32,
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  nextBtnText: {
+    color: '#fff',
+    fontSize: 22,
+    fontWeight: 'bold',
+    letterSpacing: 2,
+  },
+  disabledBtn: {
+    backgroundColor: '#ccc',
+  },
+
 });
 

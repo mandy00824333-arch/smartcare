@@ -89,13 +89,13 @@ export default function OnlineRegisterScreen({ goHome }) {
         ))}
       </View>
       <ButtonBar>
-        <TouchableOpacity style={[styles.nextBtn, !selectedDept && styles.disabledBtn]} onPress={() => selectedDept && setStep(2)} disabled={!selectedDept}>
-          <Text style={styles.nextBtnText}>下一步</Text>
-        </TouchableOpacity>
         <TouchableOpacity style={styles.backBtn} onPress={goHome}>
           <Text style={styles.backBtnText}>返回主畫面</Text>
         </TouchableOpacity>
-      </ButtonBar>
+         <TouchableOpacity style={[styles.nextBtn, !selectedDept && styles.disabledBtn]} onPress={() => selectedDept && setStep(2)} disabled={!selectedDept}>
+          <Text style={styles.nextBtnText}>下一步</Text>
+        </TouchableOpacity>
+     </ButtonBar>
     </ScrollView>
   );
 
@@ -115,11 +115,11 @@ export default function OnlineRegisterScreen({ goHome }) {
         ))}
       </View>
       <ButtonBar>
-        <TouchableOpacity style={[styles.nextBtn, !selectedDoctor && styles.disabledBtn]} onPress={() => selectedDoctor && setStep(3)} disabled={!selectedDoctor}>
-          <Text style={styles.nextBtnText}>下一步</Text>
-        </TouchableOpacity>
         <TouchableOpacity style={styles.backBtn} onPress={() => setStep(1)}>
           <Text style={styles.backBtnText}>上一步</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.nextBtn, !selectedDoctor && styles.disabledBtn]} onPress={() => selectedDoctor && setStep(3)} disabled={!selectedDoctor}>
+          <Text style={styles.nextBtnText}>下一步</Text>
         </TouchableOpacity>
       </ButtonBar>
     </ScrollView>
@@ -151,11 +151,11 @@ export default function OnlineRegisterScreen({ goHome }) {
         />
       </View>
       <ButtonBar>
-        <TouchableOpacity style={[styles.nextBtn, (!date || !time) && styles.disabledBtn]} onPress={() => {/* 送出邏輯 */}} disabled={!date || !time}>
-          <Text style={styles.nextBtnText}>送出掛號</Text>
-        </TouchableOpacity>
         <TouchableOpacity style={styles.backBtn} onPress={() => setStep(2)}>
           <Text style={styles.backBtnText}>上一步</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.nextBtn, (!date || !time) && styles.disabledBtn]} onPress={() => {/* 送出邏輯 */}} disabled={!date || !time}>
+          <Text style={styles.nextBtnText}>送出掛號</Text>
         </TouchableOpacity>
       </ButtonBar>
     </ScrollView>

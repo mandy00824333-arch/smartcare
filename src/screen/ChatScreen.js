@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Pressable, TextInput, KeyboardAvoidingView, Platform } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Pressable, TextInput, KeyboardAvoidingView, Platform, useWindowDimensions } from 'react-native';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function ChatScreen({ goHome }) {
+  const { width, height } = useWindowDimensions();
   const [tab, setTab] = useState('family');
   // 聊天機器人狀態
   const [messages, setMessages] = useState([
@@ -18,13 +19,21 @@ export default function ChatScreen({ goHome }) {
     setInput('');
     // 模擬機器人回覆
     setTimeout(() => {
-      setMessages(prev => [...prev, { from: 'bot', text: '收到您的訊息：「' + userMsg.text + '」' }]);
+      if (input.trim()=='感冒') {
+        setMessages(prev => [...prev, { from: 'bot', text: '熱水喝起來～' }]);
+      }else{
+        setMessages(prev => [...prev, { from: 'bot', text: '您問的是：「' + userMsg.text + '」嗎？我不曉得ㄟ...' }]);
+      }
+      
     }, 800);
   };
 
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-      <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
+      <ScrollView
+        contentContainerStyle={[styles.container, { minHeight: height, paddingTop: height * 0.02 }]}
+        keyboardShouldPersistTaps="handled"
+      >
         <View style={styles.titleRow}>
           <View style={styles.iconBox}>
             <View style={styles.iconCircle}>
@@ -56,12 +65,14 @@ export default function ChatScreen({ goHome }) {
         </View>
 
         {/* 內容區塊 */}
-        <View style={styles.tabContent}>
+        <View style={[styles.tabContent, { padding: width * 0.05, marginHorizontal: width * 0.04 }]}> 
           {tab === 'family' ? (
-            <View style={styles.tabPanel}><Text style={styles.tabPanelText}>這裡是家人聯繫頁面內容</Text></View>
+            <View style={[styles.tabPanel, { minHeight: height * 0.4, paddingBottom: height * 0.05 }]}><Text style={styles.tabPanelText}>這裡是家人聯繫頁面內容</Text></View>
           ) : (
-            <View style={[styles.tabPanel, { flex: 1, alignSelf: 'stretch', width: '100%' }]}> 
-              <ScrollView style={{ flex: 1, width: '100%' }} contentContainerStyle={{ paddingBottom: 12 }}>
+            <View style={[styles.tabPanel, { flex: 1, alignSelf:
+            
+            'stretch', width: '100%', minHeight: height * 0.4, paddingBottom: height * 0.05 }]}> 
+              <ScrollView style={{ flex: 1, width: '100%' }} contentContainerStyle={{ paddingBottom: height * 0.02 }}>
                 {/* 第一則訊息特別樣式（大氣泡+icon） */}
                 {messages.length > 0 && (
                   <View style={styles.assistantWelcomeRow}>
@@ -70,7 +81,7 @@ export default function ChatScreen({ goHome }) {
                     </View>
                     <View style={styles.assistantWelcomeBubble}>
                       <Text style={styles.assistantWelcomeText}>
-                        您好！我是護你同在的智慧助手，有什麼可以幫助您的嗎？您可以問我任何健康相關的問題。
+                        您好！我是護你同在的智慧助手，有什麼可以幫助您的嗎？您可以問我任何健康相關的問題。(例如：感冒)
                       </Text>
                     </View>
                   </View>
@@ -101,7 +112,7 @@ export default function ChatScreen({ goHome }) {
           )}
         </View>
 
-        <TouchableOpacity style={styles.backBtn} onPress={goHome}>
+        <TouchableOpacity style={[styles.backBtn, { paddingVertical: height * 0.02, paddingHorizontal: width * 0.12 }]} onPress={goHome}>
           <Text style={styles.backBtnText}>返回主畫面</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -202,7 +213,7 @@ const styles = StyleSheet.create({
       fontWeight: '400',
       letterSpacing: 1,
     },
-  container: { flex: 1, alignItems: 'center', backgroundColor: '#f7f5ee', paddingTop: 16 },
+  container: { flex: 1, alignItems: 'center', backgroundColor: '#f7f5ee' },
   titleRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -231,7 +242,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     marginTop: 8,
     alignSelf: 'stretch',
-    marginHorizontal: 18,
+    marginHorizontal: '4%',
     justifyContent: 'center',
   },
   tabBtn: {
@@ -262,11 +273,9 @@ const styles = StyleSheet.create({
   tabContent: {
     backgroundColor: '#fff',
     borderRadius: 12,
-    padding: 24,
-    marginHorizontal: 18,
     marginBottom: 18,
     alignSelf: 'stretch',
-    minHeight: 120,
+    minHeight: 80,
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#000',
@@ -278,8 +287,6 @@ const styles = StyleSheet.create({
   tabPanel: {
     alignItems: 'center',
     justifyContent: 'flex-start',
-    minHeight: 600,
-    paddingBottom: 40,
   },
   tabPanelText: {
     fontSize: 20,
