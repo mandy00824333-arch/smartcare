@@ -2,9 +2,13 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function WelcomeCard({ name = '邱繼潔' }) {
+const WelcomeCard = ({ name, cardWidth, cardPadding }) => {
   return (
-    <View style={styles.cardWrap}>
+    <View style={[styles.cardWrap, {
+      width: typeof cardWidth === 'number' ? cardWidth : '92%',
+      padding: typeof cardPadding === 'number' ? cardPadding : 22,
+    }]}
+    >
       <View style={styles.row}>
         <Ionicons name="heart-outline" size={28} color="#fff" style={styles.icon} />
         <Text style={styles.title}>護你同在</Text>
@@ -13,7 +17,7 @@ export default function WelcomeCard({ name = '邱繼潔' }) {
       <Text style={styles.desc}>您的健康夥伴，隨時守護您</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   cardWrap: {
@@ -59,3 +63,5 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
 });
+
+export default WelcomeCard;

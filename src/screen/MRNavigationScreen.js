@@ -1,9 +1,29 @@
 import React, { useState } from 'react';
+import ClinicInput from '../components/ClinicInput';
 import { ScrollView, View, Text, Image, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function MRNavigationScreen({ goHome }) {
-  // 移除 menuOpen 狀態
+  const [clinic, setClinic] = useState('');
+  const [step, setStep] = useState(0); // 0: 高雄高商, 1: 右側面, 2: 正前面, 3: 側面
+  let imageSource;
+  if (clinic.trim() === '高雄高商') {
+    imageSource = require('../assets/高雄高商.png');
+  } else {
+    imageSource =
+      step === 0
+        ? require('../assets/高雄高商.png')
+        : step === 1
+        ? require('../assets/右側面.png')
+        : step === 2
+        ? require('../assets/正前面.png')
+        : require('../assets/側面.png');
+  }
+
+  function ButtonBar({ children }) {
+    return <View style={styles.buttonBar}>{children}</View>;
+  }
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.titleRow}>
@@ -17,15 +37,20 @@ export default function MRNavigationScreen({ goHome }) {
           <Text style={styles.subtitleText}>混合實境引導您到正確的診間</Text>
         </View>
       </View>
-        <View style={styles.headerLeft}>
-          <Image source={require('../assets/mr-navigation.jpg')} style={{ width: 460, height: 580 }} />
-        </View>
+      {/* 新增診間輸入元件 */}
+      <ClinicInput onChange={setClinic} />
+      <View style={styles.headerLeft}>
+        <Image source={imageSource} style={{ width: 460, height: 580 }} />
+      </View>
 
       <ButtonBar>
-        <TouchableOpacity style={styles.backBtn}>
+        <TouchableOpacity style={styles.backBtn} onPress={() => setStep(Math.max(0, step - 1))}>
           <Text style={styles.backBtnText}>上一步</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.nextBtn}>
+        <TouchableOpacity
+          style={styles.nextBtn}
+          onPress={() => setStep((step + 1) % 4)}
+        >
           <Text style={styles.nextBtnText}>下一步</Text>
         </TouchableOpacity>
       </ButtonBar>
@@ -35,8 +60,15 @@ export default function MRNavigationScreen({ goHome }) {
       </TouchableOpacity>
     </ScrollView>
   );
+}
 // 側邊選單樣式
-const sideMenuStyles = {
+
+
+  // ButtonBar 元件
+  function ButtonBar({ children }) {
+    return <View style={styles.buttonBar}>{children}</View>;
+  }
+const styles = StyleSheet.create({
   sideMenuOverlay: {
     position: 'absolute',
     top: 0,
@@ -79,19 +111,6 @@ const sideMenuStyles = {
     fontSize: 20,
     color: '#888',
   },
-};
-
-Object.assign(styles, sideMenuStyles);
-
-  // ButtonBar 元件
-  function ButtonBar({ children }) {
-    return <View style={styles.buttonBar}>{children}</View>;
-  }
-}
-
-
-
-const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f7f5ee',

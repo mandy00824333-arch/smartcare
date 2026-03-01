@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Pressable, useWindowDimensions } from 'react-native';
 import { Modal, TouchableWithoutFeedback } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
@@ -15,10 +15,10 @@ import ChatScreen from './src/screen/ChatScreen';
 import GameScreen from './src/screen/GameScreen';
 import WelcomeCard from './src/components/WelcomeCard';
 
-
 export default function App() {
   const [page, setPage] = useState('welcome');
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const { width, height } = useWindowDimensions();
   const goHome = () => setPage('home');
   const menuList = [
     { title: '首頁', icon: 'home', page: 'home' },
@@ -58,21 +58,21 @@ export default function App() {
     );
   } else if (page === 'home') {
     const services = [
-      { title: '緊急呼叫', subtitle: '一鍵求助', icon: 'call', color: '#e74c3c', page: 'emergency' },
-      { title: '用藥提醒', subtitle: '準時服藥', icon: 'medkit', color: '#16a085', page: 'medication' },
-      { title: '線上掛號', subtitle: '預約門診', icon: 'calendar', color: '#9b59b6', page: 'onlineRegister' },
-      { title: '回診提醒', subtitle: '追蹤預約', icon: 'notifications', color: '#f39c12', page: 'revisitReminder' },
-      { title: 'MR導航', subtitle: '虛擬實境導覽', icon: 'location', color: '#e74c3c', page: 'mrNavigation' },
-      { title: '健康教育', subtitle: '健康資訊', icon: 'book', color: '#2980b9', page: 'health' },
-      { title: '聊天室', subtitle: '聯繫家人', icon: 'chatbubble', color: '#8e44ad', page: 'chat' },
-      { title: '健康遊戲', subtitle: '寓教於樂', icon: 'game-controller', color: '#27ae60', page: 'game' },
+      { title: '緊急呼叫', subtitle: '', icon: 'call', color: '#e74c3c', page: 'emergency' },
+      { title: '用藥提醒', subtitle: '', icon: 'medkit', color: '#16a085', page: 'medication' },
+      { title: '線上掛號', subtitle: '', icon: 'calendar', color: '#9b59b6', page: 'onlineRegister' },
+      { title: '回診提醒', subtitle: '', icon: 'notifications', color: '#f39c12', page: 'revisitReminder' },
+      { title: 'MR導航', subtitle: '', icon: 'location', color: '#e74c3c', page: 'mrNavigation' },
+      { title: '健康教育', subtitle: '', icon: 'book', color: '#2980b9', page: 'health' },
+      { title: '聊天室', subtitle: '', icon: 'chatbubble', color: '#8e44ad', page: 'chat' },
+      { title: '健康遊戲', subtitle: '', icon: 'game-controller', color: '#27ae60', page: 'game' },
     ];
     content = (
-      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1, paddingTop: 20 }}>
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1, paddingTop: height * 0.025 }}>
         <View style={styles.root}>
           {/* 歡迎卡片 */}
-          <WelcomeCard name="使用者" />
-          <Text style={[styles.sectionTitle, { marginTop: 0 }]}>所有服務</Text>
+          <WelcomeCard name="使用者" cardWidth={width * 0.92} cardPadding={width * 0.05} />
+          <Text style={[styles.sectionTitle, { marginTop: 0, fontSize: width * 0.06 }]}>所有服務</Text>
           <View style={[styles.grid, styles.scrollArea]}>
             {services.map((item, idx) => (
               <Pressable
@@ -81,9 +81,9 @@ export default function App() {
                 onPress={() => setPage(item.page)}
               >
                 <View style={[styles.iconCircle, { backgroundColor: item.color }]}> 
-                  <Ionicons name={item.icon} size={64} color="#fff" style={{ alignSelf: 'center' }} />
+                  <Ionicons name={item.icon} size={width * 0.13} color="#fff" style={{ alignSelf: 'center' }} />
                 </View>
-                <Text style={styles.cardTitle}>{item.title}</Text>
+                <Text style={[styles.cardTitle, { fontSize: width * 0.05 }]}>{item.title}</Text>
                 <Text style={styles.cardSubtitle}>{item.subtitle}</Text>
               </Pressable>
             ))}
@@ -278,7 +278,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   card: {
-    width: '47%',
+    width: '48%',
     backgroundColor: '#fff',
     borderRadius: 26,
     marginVertical: 12,
