@@ -20,6 +20,12 @@ export default function EmergencyCallScreen({ goHome }) {
           <Text style={styles.subtitleText}>快速取得緊急協助</Text>
         </View>
       </View>
+      {/* 警示區塊 */}
+      <View style={styles.alertBox}>
+        <View style={styles.alertIconCircle}>
+          <Ionicons name="warning" size={28} color="#fff" />
+        </View>
+      </View>
       <TouchableOpacity style={styles.emergencyBtn} onPress={call119}>
         <Text style={styles.emergencyBtnText}>撥打 119</Text>
       </TouchableOpacity>
@@ -28,54 +34,8 @@ export default function EmergencyCallScreen({ goHome }) {
       </TouchableOpacity>
     </ScrollView>
   );
-// 側邊選單樣式
-const sideMenuStyles = {
-  sideMenuOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    flexDirection: 'row',
-    zIndex: 100,
-  },
-  sideMenu: {
-    width: 220,
-    backgroundColor: '#fff',
-    paddingTop: 48,
-    paddingBottom: 24,
-    paddingHorizontal: 12,
-    borderRightWidth: 1,
-    borderRightColor: '#eee',
-    elevation: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 2, height: 0 },
-    shadowOpacity: 0.08,
-    shadowRadius: 6,
-  },
-  sideMenuBackdrop: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.08)',
-  },
-  menuItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 16,
-    paddingHorizontal: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
-  },
-  menuItemIcon: {
-    marginRight: 16,
-  },
-  menuItemText: {
-    fontSize: 20,
-    color: '#888',
-  },
-};
-
-Object.assign(styles, sideMenuStyles);
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

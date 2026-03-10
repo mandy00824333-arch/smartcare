@@ -8,8 +8,10 @@ export default function MRNavigationScreen({ goHome }) {
   const [step, setStep] = useState(0); // 0: 高雄高商, 1: 右側面, 2: 正前面, 3: 側面
   let imageSource;
   if (clinic.trim() === '高雄高商') {
-    imageSource = require('../assets/高雄高商.png');
-  } else {
+    //imageSource = require('../assets/高雄高商.png');
+    step=0;
+
+  } 
     imageSource =
       step === 0
         ? require('../assets/高雄高商.png')
@@ -18,7 +20,7 @@ export default function MRNavigationScreen({ goHome }) {
         : step === 2
         ? require('../assets/正前面.png')
         : require('../assets/側面.png');
-  }
+  
 
   function ButtonBar({ children }) {
     return <View style={styles.buttonBar}>{children}</View>;
