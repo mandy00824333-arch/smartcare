@@ -1,13 +1,22 @@
 
 import React, { useState, useEffect } from 'react';
-import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Pressable, TextInput, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { supabase } from '../config/supabase';
 
+
+const CATEGORY_MAP = {
+  '全部': null,
+  '營養飲食': 'nutrition',
+  '運動健身': 'exercise',
+  '心理健康': 'mental_health',
+  '慢性病': 'chronic_disease',
+  '預防保健': 'prevention',
+  '急救知識': 'first_aid',
+};
 
 export default function HealthEducationScreen({ goHome }) {
-  const categories = [
-    '全部', '營養飲食', '運動健身', '心理健康', '慢性病', '預防保健', '急救知識', '服藥禁忌'
-  ];
+  const categories = Object.keys(CATEGORY_MAP);
   const [selectedCategory, setSelectedCategory] = useState('全部');
   const [search, setSearch] = useState('');
   const [articles, setArticles] = useState([]);
@@ -16,9 +25,10 @@ export default function HealthEducationScreen({ goHome }) {
 
   useEffect(() => {
     const loadArticles = async () => {
-      let query = supabase.from('articles').select('*').order('created_at', { ascending: false });
-      if (selectedCategory !== '全部') {
-        query = query.eq('category', selectedCategory);
+      let query = supabase.from('HealthArtical').select('*').order('id', { ascending: true });
+      const dbCategory = CATEGORY_MAP[selectedCategory];
+      if (dbCategory) {
+        query = query.eq('category', dbCategory);
       }
       if (search) {
         query = query.ilike('title', `%${search}%`);
@@ -78,10 +88,13 @@ export default function HealthEducationScreen({ goHome }) {
           )}
           <View style={styles.articleContentBox}>
             <View style={styles.articleTagBox}>
-              <Text style={styles.articleTag}>{article.category}</Text>
+              <Text style={styles.articleTag}>{Object.keys(CATEGORY_MAP).find(k => CATEGORY_MAP[k] === article.category) || article.category}</Text>
             </View>
-            <Text style={styles.articleTitle}>{article.title}</Text>
-            <Text style={styles.articleDesc}>{article.content}</Text>
+            <Text style={styles.articleTitle} numberOfLines={2}>{article.title?.trim()}</Text>
+            <Text style={styles.articleDesc} numberOfLines={2}>{article.summay?.trim()}</Text>
+            {article.read_time && (
+              <Text style={styles.articleReadTime}>閱讀時間：{article.read_time} 分鐘</Text>
+            )}
           </View>
         </View>
       ))}
@@ -92,9 +105,6 @@ export default function HealthEducationScreen({ goHome }) {
   );
 }
 
-// ...移除未使用的 loadArticles ...
-
-import { TextInput, Image } from 'react-native';
 const styles = StyleSheet.create({
   container: { flex: 1, alignItems: 'center', backgroundColor: '#f7f5ee', paddingTop: 60 },
   titleRow: {
@@ -151,6 +161,9 @@ const styles = StyleSheet.create({
   },
   articleDesc: {
     fontSize: 15, color: '#444',
+  },
+  articleReadTime: {
+    fontSize: 12, color: '#999', marginTop: 4,
   },
   backBtn: { backgroundColor: '#8bbec7', borderRadius: 20, paddingVertical: 16, paddingHorizontal: 48, marginTop: 24, marginBottom: 32 },
   backBtnText: { color: '#fff', fontSize: 22, fontWeight: 'bold', letterSpacing: 2 },
